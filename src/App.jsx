@@ -1,4 +1,3 @@
-import React from 'react';
 import Dashboard from './warehouse-dashboard'; // Thay đổi đường dẫn đúng tới file của bạn
 import './App.css';
 

@@ -6,10 +6,14 @@
   "scripts": {
     "dev": "vite",
     "build": "vite build",
+    "data:update": "node scripts/update-dashboard-data.mjs",
+    "data:watch": "node scripts/update-dashboard-data.mjs --watch",
+    "data:template": "node scripts/update-dashboard-data.mjs --template",
     "lint": "eslint .",
     "preview": "vite preview"
   },
   "dependencies": {
+    "exceljs": "^4.4.0",
     "lucide-react": "^1.16.0",
     "react": "^19.2.6",
     "react-dom": "^19.2.6",
