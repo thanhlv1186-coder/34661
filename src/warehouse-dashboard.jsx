@@ -2,6 +2,7 @@ import { useState } from "react";
 import { BarChart, Bar, XAxis, YAxis, CartesianGrid, Tooltip, ResponsiveContainer, Cell, PieChart, Pie, Legend } from "recharts";
 import { DATA_UPDATED_LABEL, REGIONS, WAREHOUSES } from "./generated/warehouse-data.jsx";
 
+const systemFont = "-apple-system, BlinkMacSystemFont, 'SF Pro Text', 'SF Pro Display', 'Helvetica Neue', Arial, sans-serif";
 const statusLabel = { "🔴": "Quá tải", "🟡": "Cảnh báo", "🟢": "Bình thường" };
 
 const regionAliases = {
@@ -66,42 +67,42 @@ export default function Dashboard() {
   };
 
   return (
-    <div style={{ fontFamily: "'Be Vietnam Pro', 'Segoe UI', sans-serif", background: "#0f172a", minHeight: "100vh", color: "#e2e8f0", padding: "0" }}>
+    <div style={{ fontFamily: systemFont, background: "#f8fbff", minHeight: "100vh", color: "#0f172a", padding: "0" }}>
       {/* Header */}
-      <div style={{ background: "linear-gradient(135deg, #1e3a5f 0%, #1e293b 100%)", borderBottom: "1px solid #334155", padding: "20px 28px" }}>
+      <div style={{ background: "linear-gradient(135deg, #eff6ff 0%, #dbeafe 100%)", borderBottom: "1px solid #bfdbfe", padding: "20px 28px" }}>
         <div style={{ display: "flex", alignItems: "center", gap: 14 }}>
-          <div style={{ background: "#3b82f6", borderRadius: 10, padding: "8px 12px", fontSize: 22 }}>📦</div>
+          <div style={{ background: "#2563eb", color: "#ffffff", borderRadius: 10, padding: "8px 12px", fontSize: 22 }}>📦</div>
           <div>
-            <div style={{ fontSize: 20, fontWeight: 800, color: "#f1f5f9", letterSpacing: "-0.5px" }}>
+            <div style={{ fontSize: 20, fontWeight: 800, color: "#0f172a", letterSpacing: 0 }}>
               PHÂN TÍCH TẢI KHO — THỢ ĐMX
             </div>
-            <div style={{ fontSize: 12, color: "#94a3b8", marginTop: 2 }}>Cập nhật: {DATA_UPDATED_LABEL} · {WAREHOUSES.length} kho · {REGIONS.length} vùng</div>
+            <div style={{ fontSize: 12, color: "#475569", marginTop: 2 }}>Cập nhật: {DATA_UPDATED_LABEL} · {WAREHOUSES.length} kho · {REGIONS.length} vùng</div>
           </div>
         </div>
 
         {/* KPI Row */}
         <div style={{ display: "grid", gridTemplateColumns: "repeat(4,1fr)", gap: 12, marginTop: 20 }}>
           {[
-            { label: "Tổng năng lực", val: totalCap.toLocaleString(), sub: "đơn vị", color: "#60a5fa" },
+            { label: "Tổng năng lực", val: totalCap.toLocaleString(), sub: "đơn vị", color: "#2563eb" },
             { label: "Khai báo HT", val: totalDecl.toLocaleString(), sub: `${Math.round(totalDecl/totalCap*100)}% năng lực`, color: totalDecl/totalCap > 1 ? "#f87171" : "#34d399" },
-            { label: "Đã sử dụng", val: totalUsed.toLocaleString(), sub: `${Math.round(totalUsed/totalCap*100)}% năng lực`, color: "#a78bfa" },
+            { label: "Đã sử dụng", val: totalUsed.toLocaleString(), sub: `${Math.round(totalUsed/totalCap*100)}% năng lực`, color: "#1d4ed8" },
             { label: "Kho quá tải 🔴", val: wStats.red, sub: `/ ${WAREHOUSES.length} kho`, color: "#f87171" },
           ].map((k, i) => (
-            <div key={i} style={{ background: "#1e293b", borderRadius: 10, padding: "14px 16px", border: "1px solid #334155" }}>
-              <div style={{ fontSize: 11, color: "#64748b", textTransform: "uppercase", letterSpacing: "0.5px" }}>{k.label}</div>
+            <div key={i} style={{ background: "#ffffff", borderRadius: 10, padding: "14px 16px", border: "1px solid #bfdbfe", boxShadow: "0 8px 24px rgba(37, 99, 235, 0.08)" }}>
+              <div style={{ fontSize: 11, color: "#64748b", textTransform: "uppercase", letterSpacing: 0 }}>{k.label}</div>
               <div style={{ fontSize: 26, fontWeight: 800, color: k.color, lineHeight: 1.2, marginTop: 4 }}>{k.val}</div>
-              <div style={{ fontSize: 11, color: "#94a3b8", marginTop: 2 }}>{k.sub}</div>
+              <div style={{ fontSize: 11, color: "#475569", marginTop: 2 }}>{k.sub}</div>
             </div>
           ))}
         </div>
       </div>
 
       {/* Tabs */}
-      <div style={{ display: "flex", gap: 0, borderBottom: "1px solid #334155", background: "#1e293b", padding: "0 28px" }}>
+      <div style={{ display: "flex", gap: 0, borderBottom: "1px solid #bfdbfe", background: "#eff6ff", padding: "0 28px" }}>
         {[["overview", "📊 Tổng quan Vùng"], ["warehouses", "🏭 Danh sách Kho"], ["alerts", "🚨 Cảnh báo"]].map(([id, label]) => (
           <button key={id} onClick={() => setTab(id)} style={{
-            background: "none", border: "none", color: tab === id ? "#60a5fa" : "#64748b",
-            borderBottom: tab === id ? "2px solid #60a5fa" : "2px solid transparent",
+            background: "none", border: "none", color: tab === id ? "#2563eb" : "#64748b",
+            borderBottom: tab === id ? "2px solid #2563eb" : "2px solid transparent",
             padding: "12px 18px", cursor: "pointer", fontSize: 13, fontWeight: tab === id ? 700 : 400, transition: "all .15s"
           }}>{label}</button>
         ))}
@@ -114,8 +115,8 @@ export default function Dashboard() {
           <div>
             {/* Pie + Status */}
             <div style={{ display: "grid", gridTemplateColumns: "1fr 2fr", gap: 20, marginBottom: 24 }}>
-              <div style={{ background: "#1e293b", borderRadius: 12, padding: 20, border: "1px solid #334155" }}>
-                <div style={{ fontWeight: 700, color: "#f1f5f9", marginBottom: 16, fontSize: 14 }}>Phân bố trạng thái kho</div>
+              <div style={{ background: "#ffffff", borderRadius: 12, padding: 20, border: "1px solid #bfdbfe", boxShadow: "0 8px 24px rgba(37, 99, 235, 0.06)" }}>
+                <div style={{ fontWeight: 700, color: "#0f172a", marginBottom: 16, fontSize: 14 }}>Phân bố trạng thái kho</div>
                 <ResponsiveContainer width="100%" height={200}>
                   <PieChart>
                     <Pie data={pieData} cx="50%" cy="50%" innerRadius={55} outerRadius={85} dataKey="value" paddingAngle={3}>
@@ -135,14 +136,14 @@ export default function Dashboard() {
                 </div>
               </div>
 
-              <div style={{ background: "#1e293b", borderRadius: 12, padding: 20, border: "1px solid #334155" }}>
-                <div style={{ fontWeight: 700, color: "#f1f5f9", marginBottom: 16, fontSize: 14 }}>Khai báo HT / Năng lực theo Vùng (%)</div>
+              <div style={{ background: "#ffffff", borderRadius: 12, padding: 20, border: "1px solid #bfdbfe", boxShadow: "0 8px 24px rgba(37, 99, 235, 0.06)" }}>
+                <div style={{ fontWeight: 700, color: "#0f172a", marginBottom: 16, fontSize: 14 }}>Khai báo HT / Năng lực theo Vùng (%)</div>
                 <ResponsiveContainer width="100%" height={210}>
                   <BarChart data={REGIONS.map(r => ({ name: r.short, pct: r.pctDecl, status: r.status }))} barSize={28}>
-                    <CartesianGrid strokeDasharray="3 3" stroke="#334155" />
-                    <XAxis dataKey="name" tick={{ fill: "#94a3b8", fontSize: 11 }} />
-                    <YAxis tick={{ fill: "#94a3b8", fontSize: 11 }} domain={[0, 140]} unit="%" />
-                    <Tooltip formatter={(v) => [v + "%", "% Khai báo"]} contentStyle={{ background: "#1e293b", border: "1px solid #334155" }} />
+                    <CartesianGrid strokeDasharray="3 3" stroke="#dbeafe" />
+                    <XAxis dataKey="name" tick={{ fill: "#475569", fontSize: 11 }} />
+                    <YAxis tick={{ fill: "#475569", fontSize: 11 }} domain={[0, 140]} unit="%" />
+                    <Tooltip formatter={(v) => [v + "%", "% Khai báo"]} contentStyle={{ background: "#ffffff", border: "1px solid #bfdbfe", color: "#0f172a" }} />
                     <Bar dataKey="pct" radius={[4, 4, 0, 0]}>
                       {REGIONS.map((r, i) => (
                         <Cell key={i} fill={r.pctDecl > 100 ? "#ef4444" : r.pctDecl >= 90 ? "#f59e0b" : "#22c55e"} />
@@ -154,38 +155,38 @@ export default function Dashboard() {
             </div>
 
             {/* Region Cards */}
-            <div style={{ fontWeight: 700, color: "#f1f5f9", marginBottom: 12, fontSize: 14 }}>Chi tiết theo Vùng</div>
+            <div style={{ fontWeight: 700, color: "#0f172a", marginBottom: 12, fontSize: 14 }}>Chi tiết theo Vùng</div>
             <div style={{ display: "grid", gridTemplateColumns: "repeat(3,1fr)", gap: 14 }}>
               {REGIONS.map((r, i) => {
                 const whInRegion = WAREHOUSES.filter(w => sameRegion(w.region, r.name));
                 const wSt = countByStatus(whInRegion);
                 return (
-                  <div key={i} style={{ background: "#1e293b", borderRadius: 12, padding: 16, border: `1px solid ${r.status === "🔴" ? "#ef444480" : r.status === "🟡" ? "#f59e0b80" : "#334155"}`, cursor: "pointer", transition: "transform .15s" }}
+                  <div key={i} style={{ background: "#ffffff", borderRadius: 12, padding: 16, border: `1px solid ${r.status === "🔴" ? "#fecaca" : r.status === "🟡" ? "#fde68a" : "#bfdbfe"}`, boxShadow: "0 8px 24px rgba(37, 99, 235, 0.06)", cursor: "pointer", transition: "transform .15s" }}
                     onClick={() => { setSelectedRegion(r.name); setTab("warehouses"); }}>
                     <div style={{ display: "flex", justifyContent: "space-between", alignItems: "flex-start" }}>
                       <div>
-                        <div style={{ fontSize: 13, fontWeight: 700, color: "#f1f5f9" }}>{r.name}</div>
+                        <div style={{ fontSize: 13, fontWeight: 700, color: "#0f172a" }}>{r.name}</div>
                         <div style={{ fontSize: 11, color: "#64748b", marginTop: 2 }}>NL: {r.capacity.toLocaleString()} · {whInRegion.length} kho</div>
                       </div>
                       <div style={{ fontSize: 20 }}>{r.status}</div>
                     </div>
                     {/* Progress bar */}
                     <div style={{ marginTop: 10, marginBottom: 6 }}>
-                      <div style={{ display: "flex", justifyContent: "space-between", fontSize: 11, color: "#94a3b8", marginBottom: 4 }}>
+                      <div style={{ display: "flex", justifyContent: "space-between", fontSize: 11, color: "#475569", marginBottom: 4 }}>
                         <span>Khai báo/NL</span><span style={{ fontWeight: 700, color: r.pctDecl > 100 ? "#f87171" : r.pctDecl >= 90 ? "#fbbf24" : "#4ade80" }}>{r.pctDecl}%</span>
                       </div>
-                      <div style={{ background: "#334155", borderRadius: 4, height: 6 }}>
+                      <div style={{ background: "#dbeafe", borderRadius: 4, height: 6 }}>
                         <div style={{ width: `${Math.min(r.pctDecl, 140)}%`, background: r.pctDecl > 100 ? "#ef4444" : r.pctDecl >= 90 ? "#f59e0b" : "#22c55e", height: 6, borderRadius: 4 }} />
                       </div>
                     </div>
                     <div style={{ display: "flex", gap: 8, marginTop: 8 }}>
                       {[["ML", r.pctAC], ["ĐHK", r.pctDHK]].map(([lbl, pct]) => (
-                        <div key={lbl} style={{ flex: 1, background: "#0f172a", borderRadius: 6, padding: "6px 8px", textAlign: "center" }}>
+                        <div key={lbl} style={{ flex: 1, background: "#eff6ff", borderRadius: 6, padding: "6px 8px", textAlign: "center" }}>
                           <div style={{ fontSize: 10, color: "#64748b" }}>{lbl}</div>
                           <div style={{ fontSize: 14, fontWeight: 700, color: pct > 100 ? "#f87171" : pct >= 90 ? "#fbbf24" : "#4ade80" }}>{pct}%</div>
                         </div>
                       ))}
-                      <div style={{ flex: 1, background: "#0f172a", borderRadius: 6, padding: "6px 8px", textAlign: "center" }}>
+                      <div style={{ flex: 1, background: "#eff6ff", borderRadius: 6, padding: "6px 8px", textAlign: "center" }}>
                         <div style={{ fontSize: 10, color: "#64748b" }}>🔴 kho</div>
                         <div style={{ fontSize: 14, fontWeight: 700, color: wSt.red > 0 ? "#f87171" : "#4ade80" }}>{wSt.red}</div>
                       </div>
@@ -201,17 +202,17 @@ export default function Dashboard() {
         {tab === "warehouses" && (
           <div>
             <div style={{ display: "flex", gap: 10, marginBottom: 16, flexWrap: "wrap", alignItems: "center" }}>
-              <div style={{ fontSize: 13, color: "#94a3b8" }}>Lọc vùng:</div>
-              <button onClick={() => setSelectedRegion(null)} style={{ padding: "5px 12px", borderRadius: 20, border: "none", cursor: "pointer", fontSize: 12, background: !selectedRegion ? "#3b82f6" : "#334155", color: "#f1f5f9" }}>Tất cả</button>
+              <div style={{ fontSize: 13, color: "#475569" }}>Lọc vùng:</div>
+              <button onClick={() => setSelectedRegion(null)} style={{ padding: "5px 12px", borderRadius: 20, border: "1px solid #bfdbfe", cursor: "pointer", fontSize: 12, background: !selectedRegion ? "#2563eb" : "#ffffff", color: !selectedRegion ? "#ffffff" : "#1d4ed8" }}>Tất cả</button>
               {REGIONS.map(r => (
-                <button key={r.name} onClick={() => setSelectedRegion(r.name)} style={{ padding: "5px 12px", borderRadius: 20, border: "none", cursor: "pointer", fontSize: 12, background: selectedRegion === r.name ? "#3b82f6" : "#334155", color: "#f1f5f9" }}>{r.short}</button>
+                <button key={r.name} onClick={() => setSelectedRegion(r.name)} style={{ padding: "5px 12px", borderRadius: 20, border: "1px solid #bfdbfe", cursor: "pointer", fontSize: 12, background: selectedRegion === r.name ? "#2563eb" : "#ffffff", color: selectedRegion === r.name ? "#ffffff" : "#1d4ed8" }}>{r.short}</button>
               ))}
             </div>
             <div style={{ fontSize: 12, color: "#64748b", marginBottom: 10 }}>Hiển thị {sortedWH.length} kho · Nhấp tiêu đề để sắp xếp</div>
             <div style={{ overflowX: "auto" }}>
               <table style={{ width: "100%", borderCollapse: "collapse", fontSize: 12 }}>
                 <thead>
-                  <tr style={{ background: "#334155", color: "#94a3b8" }}>
+                  <tr style={{ background: "#dbeafe", color: "#1e3a8a" }}>
                     {[["name", "Tên kho"], ["region", "Vùng"], ["cap", "NL Tổng"], ["pctDecl", "% KB/NL"], ["pctAC", "% KB ML"], ["pctDHK", "% KB ĐHK"], ["foreAC", "% NL/DBA ML"], ["foreDHK", "% NL/DBA ĐHK"], ["status", "Trạng thái"]].map(([col, label]) => (
                       <th key={col} onClick={() => handleSort(col)} style={{ padding: "8px 10px", textAlign: "left", cursor: "pointer", whiteSpace: "nowrap", userSelect: "none" }}>
                         {label} {sortCol === col ? (sortAsc ? "↑" : "↓") : ""}
@@ -221,16 +222,16 @@ export default function Dashboard() {
                 </thead>
                 <tbody>
                   {sortedWH.map((w, i) => (
-                    <tr key={i} style={{ background: i % 2 === 0 ? "#1e293b" : "#162032", borderBottom: "1px solid #1e293b" }}>
-                      <td style={{ padding: "7px 10px", color: "#f1f5f9", fontWeight: 600 }}>{w.name}</td>
-                      <td style={{ padding: "7px 10px", color: "#94a3b8", fontSize: 11 }}>{w.region}</td>
-                      <td style={{ padding: "7px 10px", color: "#60a5fa" }}>{w.cap}</td>
+                    <tr key={i} style={{ background: i % 2 === 0 ? "#ffffff" : "#f8fbff", borderBottom: "1px solid #dbeafe" }}>
+                      <td style={{ padding: "7px 10px", color: "#0f172a", fontWeight: 600 }}>{w.name}</td>
+                      <td style={{ padding: "7px 10px", color: "#475569", fontSize: 11 }}>{w.region}</td>
+                      <td style={{ padding: "7px 10px", color: "#2563eb" }}>{w.cap}</td>
                       <td style={{ padding: "7px 10px", fontWeight: 700, color: w.pctDecl > 100 ? "#f87171" : w.pctDecl >= 90 ? "#fbbf24" : "#4ade80" }}>{w.pctDecl}%</td>
-                      <td style={{ padding: "7px 10px", color: w.pctAC > 100 ? "#f87171" : w.pctAC >= 90 ? "#fbbf24" : "#94a3b8" }}>{w.pctAC}%</td>
-                      <td style={{ padding: "7px 10px", color: w.pctDHK > 100 ? "#f87171" : w.pctDHK >= 90 ? "#fbbf24" : "#94a3b8" }}>{w.pctDHK}%</td>
-                      <td style={{ padding: "7px 10px", color: w.foreAC > 100 ? "#f87171" : "#94a3b8" }}>{w.foreAC}%</td>
-                      <td style={{ padding: "7px 10px", color: w.foreDHK > 100 ? "#f87171" : "#94a3b8" }}>{w.foreDHK}%</td>
-                      <td style={{ padding: "7px 10px" }}><span style={{ background: w.status === "🔴" ? "#450a0a" : w.status === "🟡" ? "#451a03" : "#052e16", color: w.status === "🔴" ? "#fca5a5" : w.status === "🟡" ? "#fcd34d" : "#86efac", borderRadius: 6, padding: "2px 8px", fontSize: 11 }}>{w.status} {statusLabel[w.status]}</span></td>
+                      <td style={{ padding: "7px 10px", color: w.pctAC > 100 ? "#dc2626" : w.pctAC >= 90 ? "#d97706" : "#475569" }}>{w.pctAC}%</td>
+                      <td style={{ padding: "7px 10px", color: w.pctDHK > 100 ? "#dc2626" : w.pctDHK >= 90 ? "#d97706" : "#475569" }}>{w.pctDHK}%</td>
+                      <td style={{ padding: "7px 10px", color: w.foreAC > 100 ? "#dc2626" : "#475569" }}>{w.foreAC}%</td>
+                      <td style={{ padding: "7px 10px", color: w.foreDHK > 100 ? "#dc2626" : "#475569" }}>{w.foreDHK}%</td>
+                      <td style={{ padding: "7px 10px" }}><span style={{ background: w.status === "🔴" ? "#fee2e2" : w.status === "🟡" ? "#fef3c7" : "#dcfce7", color: w.status === "🔴" ? "#b91c1c" : w.status === "🟡" ? "#92400e" : "#166534", borderRadius: 6, padding: "2px 8px", fontSize: 11 }}>{w.status} {statusLabel[w.status]}</span></td>
                     </tr>
                   ))}
                 </tbody>
@@ -244,12 +245,12 @@ export default function Dashboard() {
           <div>
             <div style={{ display: "grid", gridTemplateColumns: "1fr 1fr", gap: 20, marginBottom: 24 }}>
               {/* Top critical */}
-              <div style={{ background: "#1e293b", borderRadius: 12, padding: 20, border: "1px solid #334155" }}>
+              <div style={{ background: "#ffffff", borderRadius: 12, padding: 20, border: "1px solid #bfdbfe", boxShadow: "0 8px 24px rgba(37, 99, 235, 0.06)" }}>
                 <div style={{ fontWeight: 700, color: "#f87171", marginBottom: 14, fontSize: 14 }}>🔴 Top kho khai báo vượt năng lực cao nhất</div>
                 {WAREHOUSES.filter(w => w.pctDecl > 100).sort((a, b) => b.pctDecl - a.pctDecl).slice(0, 8).map((w, i) => (
-                  <div key={i} style={{ display: "flex", justifyContent: "space-between", alignItems: "center", padding: "7px 0", borderBottom: "1px solid #1e3a5f" }}>
+                  <div key={i} style={{ display: "flex", justifyContent: "space-between", alignItems: "center", padding: "7px 0", borderBottom: "1px solid #dbeafe" }}>
                     <div>
-                      <div style={{ fontSize: 13, color: "#f1f5f9", fontWeight: 600 }}>{w.name}</div>
+                      <div style={{ fontSize: 13, color: "#0f172a", fontWeight: 600 }}>{w.name}</div>
                       <div style={{ fontSize: 11, color: "#64748b" }}>{w.region}</div>
                     </div>
                     <div style={{ textAlign: "right" }}>
@@ -261,16 +262,16 @@ export default function Dashboard() {
               </div>
 
               {/* ĐHK high */}
-              <div style={{ background: "#1e293b", borderRadius: 12, padding: 20, border: "1px solid #334155" }}>
-                <div style={{ fontWeight: 700, color: "#fbbf24", marginBottom: 14, fontSize: 14 }}>⚠️ Kho ĐHK khai báo vượt năng lực cao nhất</div>
+              <div style={{ background: "#ffffff", borderRadius: 12, padding: 20, border: "1px solid #bfdbfe", boxShadow: "0 8px 24px rgba(37, 99, 235, 0.06)" }}>
+                <div style={{ fontWeight: 700, color: "#d97706", marginBottom: 14, fontSize: 14 }}>⚠️ Kho ĐHK khai báo vượt năng lực cao nhất</div>
                 {WAREHOUSES.filter(w => w.pctDHK > 100).sort((a, b) => b.pctDHK - a.pctDHK).slice(0, 8).map((w, i) => (
-                  <div key={i} style={{ display: "flex", justifyContent: "space-between", alignItems: "center", padding: "7px 0", borderBottom: "1px solid #1e3a5f" }}>
+                  <div key={i} style={{ display: "flex", justifyContent: "space-between", alignItems: "center", padding: "7px 0", borderBottom: "1px solid #dbeafe" }}>
                     <div>
-                      <div style={{ fontSize: 13, color: "#f1f5f9", fontWeight: 600 }}>{w.name}</div>
+                      <div style={{ fontSize: 13, color: "#0f172a", fontWeight: 600 }}>{w.name}</div>
                       <div style={{ fontSize: 11, color: "#64748b" }}>{w.region} · ML: {w.pctAC}%</div>
                     </div>
                     <div style={{ textAlign: "right" }}>
-                      <div style={{ fontSize: 15, fontWeight: 800, color: "#fbbf24" }}>{w.pctDHK}%</div>
+                      <div style={{ fontSize: 15, fontWeight: 800, color: "#d97706" }}>{w.pctDHK}%</div>
                       <div style={{ fontSize: 10, color: "#64748b" }}>ĐHK/NL</div>
                     </div>
                   </div>
@@ -279,16 +280,16 @@ export default function Dashboard() {
             </div>
 
             {/* Forecast alerts */}
-            <div style={{ background: "#1e293b", borderRadius: 12, padding: 20, border: "1px solid #334155", marginBottom: 20 }}>
-              <div style={{ fontWeight: 700, color: "#a78bfa", marginBottom: 14, fontSize: 14 }}>📈 Kho có % Dự báo Máy lạnh vượt 200% năng lực</div>
+            <div style={{ background: "#ffffff", borderRadius: 12, padding: 20, border: "1px solid #bfdbfe", boxShadow: "0 8px 24px rgba(37, 99, 235, 0.06)", marginBottom: 20 }}>
+              <div style={{ fontWeight: 700, color: "#1d4ed8", marginBottom: 14, fontSize: 14 }}>📈 Kho có % Dự báo Máy lạnh vượt 200% năng lực</div>
               <div style={{ display: "grid", gridTemplateColumns: "repeat(3,1fr)", gap: 10 }}>
                 {WAREHOUSES.filter(w => w.foreAC > 200).sort((a, b) => b.foreAC - a.foreAC).map((w, i) => (
-                  <div key={i} style={{ background: "#0f172a", borderRadius: 8, padding: "10px 14px", border: "1px solid #334155" }}>
-                    <div style={{ fontSize: 13, fontWeight: 700, color: "#f1f5f9" }}>{w.name}</div>
+                  <div key={i} style={{ background: "#eff6ff", borderRadius: 8, padding: "10px 14px", border: "1px solid #bfdbfe" }}>
+                    <div style={{ fontSize: 13, fontWeight: 700, color: "#0f172a" }}>{w.name}</div>
                     <div style={{ fontSize: 11, color: "#64748b", marginBottom: 6 }}>{w.region}</div>
                     <div style={{ display: "flex", gap: 12 }}>
-                      <div><span style={{ fontSize: 11, color: "#64748b" }}>DBA ML:</span> <span style={{ fontWeight: 800, color: "#a78bfa" }}>{w.foreAC}%</span></div>
-                      <div><span style={{ fontSize: 11, color: "#64748b" }}>DBA ĐHK:</span> <span style={{ fontWeight: 700, color: "#94a3b8" }}>{w.foreDHK}%</span></div>
+                      <div><span style={{ fontSize: 11, color: "#64748b" }}>DBA ML:</span> <span style={{ fontWeight: 800, color: "#1d4ed8" }}>{w.foreAC}%</span></div>
+                      <div><span style={{ fontSize: 11, color: "#64748b" }}>DBA ĐHK:</span> <span style={{ fontWeight: 700, color: "#475569" }}>{w.foreDHK}%</span></div>
                     </div>
                   </div>
                 ))}
@@ -300,12 +301,12 @@ export default function Dashboard() {
               {[
                 { label: "Kho khai báo vượt 100% NL (Tổng)", val: WAREHOUSES.filter(w => w.pctDecl > 100).length, color: "#f87171", icon: "🔴" },
                 { label: "Kho ĐHK vượt 100% NL", val: WAREHOUSES.filter(w => w.pctDHK > 100).length, color: "#fbbf24", icon: "❄️" },
-                { label: "Kho ML vượt 100% NL", val: WAREHOUSES.filter(w => w.pctAC > 100).length, color: "#60a5fa", icon: "🌡️" },
-                { label: "Kho chưa khai báo (0%)", val: WAREHOUSES.filter(w => w.pctDecl === 0).length, color: "#94a3b8", icon: "⬜" },
+                { label: "Kho ML vượt 100% NL", val: WAREHOUSES.filter(w => w.pctAC > 100).length, color: "#2563eb", icon: "🌡️" },
+                { label: "Kho chưa khai báo (0%)", val: WAREHOUSES.filter(w => w.pctDecl === 0).length, color: "#475569", icon: "⬜" },
                 { label: "Vùng quá tải (>100%)", val: REGIONS.filter(r => r.pctDecl > 100).length, color: "#f87171", icon: "📍" },
-                { label: "Kho dự báo ML >200%", val: WAREHOUSES.filter(w => w.foreAC > 200).length, color: "#a78bfa", icon: "📈" },
+                { label: "Kho dự báo ML >200%", val: WAREHOUSES.filter(w => w.foreAC > 200).length, color: "#1d4ed8", icon: "📈" },
               ].map((s, i) => (
-                <div key={i} style={{ background: "#1e293b", borderRadius: 10, padding: "14px 16px", border: "1px solid #334155", display: "flex", alignItems: "center", gap: 12 }}>
+                <div key={i} style={{ background: "#ffffff", borderRadius: 10, padding: "14px 16px", border: "1px solid #bfdbfe", boxShadow: "0 8px 24px rgba(37, 99, 235, 0.06)", display: "flex", alignItems: "center", gap: 12 }}>
                   <div style={{ fontSize: 28 }}>{s.icon}</div>
                   <div>
                     <div style={{ fontSize: 26, fontWeight: 800, color: s.color }}>{s.val}</div>
