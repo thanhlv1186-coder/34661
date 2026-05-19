@@ -71,7 +71,7 @@ export default function Dashboard() {
       {/* Header */}
       <div style={{ background: "linear-gradient(135deg, #eff6ff 0%, #dbeafe 100%)", borderBottom: "1px solid #bfdbfe", padding: "20px 28px" }}>
         <div style={{ display: "flex", alignItems: "center", gap: 14 }}>
-          <div style={{ background: "#2563eb", color: "#ffffff", borderRadius: 10, padding: "8px 12px", fontSize: 22 }}>📦</div>
+          <div style={{ background: "#2563eb", color: "#ffffff", borderRadius: 10, padding: "8px 12px", fontSize: 22 }}>src="https://cdnv2.tgdd.vn/webmwg/production-fe/tdm/static/images/Logo_ThoDMX.png"</div>
           <div>
             <div style={{ fontSize: 20, fontWeight: 800, color: "#0f172a", letterSpacing: 0 }}>
               PHÂN TÍCH TẢI KHO — THỢ ĐMX
@@ -83,7 +83,7 @@ export default function Dashboard() {
         {/* KPI Row */}
         <div style={{ display: "grid", gridTemplateColumns: "repeat(4,1fr)", gap: 12, marginTop: 20 }}>
           {[
-            { label: "Tổng năng lực", val: totalCap.toLocaleString(), sub: "sản phẩm", color: "#2563eb" },
+            { label: "Tổng năng lực", val: totalCap.toLocaleString(), sub: "Sản phẩm", color: "#2563eb" },
             { label: "Khai báo hệ thống", val: totalDecl.toLocaleString(), sub: `${Math.round(totalDecl/totalCap*100)}% năng lực`, color: totalDecl/totalCap > 1 ? "#f87171" : "#34d399" },
             { label: "Đã sử dụng", val: totalUsed.toLocaleString(), sub: `${Math.round(totalUsed/totalCap*100)}% năng lực`, color: "#1d4ed8" },
             { label: "Kho quá tải 🔴", val: wStats.red, sub: `/ ${WAREHOUSES.length} kho`, color: "#f87171" },
