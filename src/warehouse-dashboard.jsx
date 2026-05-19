@@ -67,15 +67,16 @@ export default function Dashboard() {
   };
 
   return (
-    <div style={{ fontFamily: systemFont, background: "#f8fbff", minHeight: "100vh", color: "#0f172a", padding: "0" }}>
+    <div style={{ fontFamily: "Inter, -apple-system, BlinkMacSystemFont, 'Segoe UI', Roboto, Helvetica, Arial, sans-serif", background: "#f8fbff", minHeight: "100vh", color: "#0f172a", padding: "0" }}>
       {/* Header */}
       <div style={{ background: "linear-gradient(135deg, #eff6ff 0%, #dbeafe 100%)", borderBottom: "1px solid #bfdbfe", padding: "20px 28px" }}>
         <div style={{ display: "flex", alignItems: "center", gap: 14 }}>
           <div style={{ display: "flex", alignItems: "center", background: "#2563eb", color: "#ffffff", borderRadius: 10, padding: "8px 12px" }}>
-  <img src="https://cdnv2.tgdd.vn/webmwg/production-fe/tdm/static/images/Logo_ThoDMX.png" alt="Thợ Điện Máy Xanh" style={{ height: "30px", width: "auto" }} />
-</div>
+            <img src="https://cdnv2.tgdd.vn/webmwg/production-fe/tdm/static/images/Logo_ThoDMX.png" alt="Thợ Điện Máy Xanh" style={{ height: "30px", width: "auto" }} />
+          </div>
           <div>
-            <div style={{ fontSize: 20, fontWeight: 800, color: "#0f172a", letterSpacing: 0 }}>
+            {/* Đã đổi font mới, giảm fontWeight xuống 700 và thêm letterSpacing nhẹ để giãn chữ */}
+            <div style={{ fontSize: 20, fontWeight: 700, color: "#0f172a", letterSpacing: "0.5px" }}>
               PHÂN TÍCH TẢI KHO — THỢ ĐMX
             </div>
             <div style={{ fontSize: 12, color: "#475569", marginTop: 2 }}>Cập nhật: {DATA_UPDATED_LABEL} · {WAREHOUSES.length} kho · {REGIONS.length} vùng</div>
