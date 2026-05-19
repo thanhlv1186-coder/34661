@@ -83,8 +83,8 @@ export default function Dashboard() {
         {/* KPI Row */}
         <div style={{ display: "grid", gridTemplateColumns: "repeat(4,1fr)", gap: 12, marginTop: 20 }}>
           {[
-            { label: "Tổng năng lực", val: totalCap.toLocaleString(), sub: "đơn vị", color: "#2563eb" },
-            { label: "Khai báo HT", val: totalDecl.toLocaleString(), sub: `${Math.round(totalDecl/totalCap*100)}% năng lực`, color: totalDecl/totalCap > 1 ? "#f87171" : "#34d399" },
+            { label: "Tổng năng lực", val: totalCap.toLocaleString(), sub: "sản phẩm", color: "#2563eb" },
+            { label: "Khai báo hệ thống", val: totalDecl.toLocaleString(), sub: `${Math.round(totalDecl/totalCap*100)}% năng lực`, color: totalDecl/totalCap > 1 ? "#f87171" : "#34d399" },
             { label: "Đã sử dụng", val: totalUsed.toLocaleString(), sub: `${Math.round(totalUsed/totalCap*100)}% năng lực`, color: "#1d4ed8" },
             { label: "Kho quá tải 🔴", val: wStats.red, sub: `/ ${WAREHOUSES.length} kho`, color: "#f87171" },
           ].map((k, i) => (
