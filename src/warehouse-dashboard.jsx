@@ -71,7 +71,7 @@ export default function Dashboard() {
       {/* Header */}
       <div style={{ background: "linear-gradient(135deg, #eff6ff 0%, #dbeafe 100%)", borderBottom: "1px solid #bfdbfe", padding: "20px 28px" }}>
         <div style={{ display: "flex", alignItems: "center", gap: 14 }}>
-          <div style={{ background: "#2563eb", color: "#ffffff", borderRadius: 10, padding: "8px 12px", fontSize: 22 }}>src="https://cdnv2.tgdd.vn/webmwg/production-fe/tdm/static/images/Logo_ThoDMX.png"</div>
+          <div style={{ background: "#2563eb", color: "#ffffff", borderRadius: 10, padding: "8px 12px", fontSize: 22 }}>THƠ Đien máy XANH</div>
           <div>
             <div style={{ fontSize: 20, fontWeight: 800, color: "#0f172a", letterSpacing: 0 }}>
               PHÂN TÍCH TẢI KHO — THỢ ĐMX
