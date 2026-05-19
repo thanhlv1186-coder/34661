@@ -76,7 +76,7 @@ export default function Dashboard() {
           </div>
           <div>
             {/* Đã đổi font mới, giảm fontWeight xuống 700 và thêm letterSpacing nhẹ để giãn chữ */}
-            <div style={{ fontSize: 20, fontWeight: 700, color: "#0f172a", letterSpacing: "0.5px" }}>
+            <div style={{ fontSize: 20, fontWeight: 800, color: "#0f172a", letterSpacing: "0.5px" }}>
               PHÂN TÍCH TẢI KHO — THỢ ĐMX
             </div>
             <div style={{ fontSize: 12, color: "#475569", marginTop: 2 }}>Cập nhật: {DATA_UPDATED_LABEL} · {WAREHOUSES.length} kho · {REGIONS.length} vùng</div>
