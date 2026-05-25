@@ -164,7 +164,7 @@ export default function Dashboard() {
                 const whInRegion = WAREHOUSES.filter(w => sameRegion(w.region, r.name));
                 const wSt = countByStatus(whInRegion);
                 return (
-                  <div key={i} style={{ background: "#ffffff", borderRadius: 12, padding: 16, border: `1px solid ${r.status === "🔴" ? "#fecaca" : r.status === "🟡" ? "#fde68a" : "#bfdbfe"}`, boxShadow: "0 8px 24px rgba(37, 99, 235, 0.06)", cursor: "pointer", transition: "transform .15s" }}
+                  <div key={i} style={{ background: "#ffffff", borderRadius: 12, padding: 16, border: `1px solid ${r.status === "🔴" ? "#fecaca" : r.status === "🟡" ? "#fde68a" : "#bfdbfe"}`, boxShadow: "0 4px 12px rgba(37, 99, 235, 0.04)", cursor: "pointer", transition: "all .15s", position: "relative", overflow: "hidden" }}
                     onClick={() => { setSelectedRegion(r.name); setTab("warehouses"); }}>
                     <div style={{ display: "flex", justifyContent: "space-between", alignItems: "flex-start" }}>
                       <div>
@@ -173,12 +173,12 @@ export default function Dashboard() {
                       </div>
                       <div style={{ fontSize: 20 }}>{r.status}</div>
                     </div>
-                    {/* Progress bar */}
+                    {/* Progress bar - FIX: Added overflow hidden to prevent bar from overflowing */}
                     <div style={{ marginTop: 10, marginBottom: 6 }}>
                       <div style={{ display: "flex", justifyContent: "space-between", fontSize: 11, color: "#475569", marginBottom: 4 }}>
                         <span>Khai báo/NL</span><span style={{ fontWeight: 700, color: r.pctDecl > 100 ? "#f87171" : r.pctDecl >= 90 ? "#fbbf24" : "#4ade80" }}>{r.pctDecl}%</span>
                       </div>
-                      <div style={{ background: "#dbeafe", borderRadius: 4, height: 6 }}>
+                      <div style={{ background: "#dbeafe", borderRadius: 4, height: 6, overflow: "hidden" }}>
                         <div style={{ width: `${Math.min(r.pctDecl, 140)}%`, background: r.pctDecl > 100 ? "#ef4444" : r.pctDecl >= 90 ? "#f59e0b" : "#22c55e", height: 6, borderRadius: 4 }} />
                       </div>
                     </div>
@@ -206,9 +206,9 @@ export default function Dashboard() {
           <div>
             <div style={{ display: "flex", gap: 10, marginBottom: 16, flexWrap: "wrap", alignItems: "center" }}>
               <div style={{ fontSize: 13, color: "#475569" }}>Lọc vùng:</div>
-              <button onClick={() => setSelectedRegion(null)} style={{ padding: "5px 12px", borderRadius: 20, border: "1px solid #bfdbfe", cursor: "pointer", fontSize: 12, background: !selectedRegion ? "#2563eb" : "#ffffff", color: !selectedRegion ? "#ffffff" : "#1d4ed8" }}>Tất cả</button>
+              <button onClick={() => setSelectedRegion(null)} style={{ padding: "5px 12px", borderRadius: 20, border: "1px solid #bfdbfe", cursor: "pointer", fontSize: 12, background: !selectedRegion ? "#2563eb" : "#ffffff", color: !selectedRegion ? "#ffffff" : "#475569", fontWeight: !selectedRegion ? 600 : 400, transition: "all .15s" }}>Tất cả</button>
               {REGIONS.map(r => (
-                <button key={r.name} onClick={() => setSelectedRegion(r.name)} style={{ padding: "5px 12px", borderRadius: 20, border: "1px solid #bfdbfe", cursor: "pointer", fontSize: 12, background: selectedRegion === r.name ? "#2563eb" : "#ffffff", color: selectedRegion === r.name ? "#ffffff" : "#1d4ed8" }}>{r.short}</button>
+                <button key={r.name} onClick={() => setSelectedRegion(r.name)} style={{ padding: "5px 12px", borderRadius: 20, border: "1px solid #bfdbfe", cursor: "pointer", fontSize: 12, background: selectedRegion === r.name ? "#2563eb" : "#ffffff", color: selectedRegion === r.name ? "#ffffff" : "#475569", fontWeight: selectedRegion === r.name ? 600 : 400, transition: "all .15s" }}>{r.short}</button>
               ))}
             </div>
             <div style={{ fontSize: 12, color: "#64748b", marginBottom: 10 }}>Hiển thị {sortedWH.length} kho · Nhấp tiêu đề để sắp xếp</div>
@@ -234,7 +234,7 @@ export default function Dashboard() {
                       <td style={{ padding: "7px 10px", color: w.pctDHK > 100 ? "#dc2626" : w.pctDHK >= 90 ? "#d97706" : "#475569" }}>{w.pctDHK}%</td>
                       <td style={{ padding: "7px 10px", color: w.foreAC > 100 ? "#dc2626" : "#475569" }}>{w.foreAC}%</td>
                       <td style={{ padding: "7px 10px", color: w.foreDHK > 100 ? "#dc2626" : "#475569" }}>{w.foreDHK}%</td>
-                      <td style={{ padding: "7px 10px" }}><span style={{ background: w.status === "🔴" ? "#fee2e2" : w.status === "🟡" ? "#fef3c7" : "#dcfce7", color: w.status === "🔴" ? "#b91c1c" : w.status === "🟡" ? "#92400e" : "#166534", borderRadius: 6, padding: "2px 8px", fontSize: 11 }}>{w.status} {statusLabel[w.status]}</span></td>
+                      <td style={{ padding: "7px 10px" }}><span style={{ background: w.status === "🔴" ? "#fee2e2" : w.status === "🟡" ? "#fef3c7" : "#dcfce7", color: w.status === "🔴" ? "#991b1b" : w.status === "🟡" ? "#92400e" : "#065f46", padding: "3px 8px", borderRadius: 4, fontSize: 11, fontWeight: 600 }}>{statusLabel[w.status]}</span></td>
                     </tr>
                   ))}
                 </tbody>
@@ -309,7 +309,7 @@ export default function Dashboard() {
                 { label: "Vùng quá tải (>100%)", val: REGIONS.filter(r => r.pctDecl > 100).length, color: "#f87171", icon: "📍" },
                 { label: "Kho dự báo ML >200%", val: WAREHOUSES.filter(w => w.foreAC > 200).length, color: "#1d4ed8", icon: "📈" },
               ].map((s, i) => (
-                <div key={i} style={{ background: "#ffffff", borderRadius: 10, padding: "14px 16px", border: "1px solid #bfdbfe", boxShadow: "0 8px 24px rgba(37, 99, 235, 0.06)", display: "flex", alignItems: "center", gap: 12 }}>
+                <div key={i} style={{ background: "#ffffff", borderRadius: 10, padding: "14px 16px", border: "1px solid #bfdbfe", boxShadow: "0 8px 24px rgba(37, 99, 235, 0.06)", display: "flex", gap: 12, alignItems: "center" }}>
                   <div style={{ fontSize: 28 }}>{s.icon}</div>
                   <div>
                     <div style={{ fontSize: 26, fontWeight: 800, color: s.color }}>{s.val}</div>
