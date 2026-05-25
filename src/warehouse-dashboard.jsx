@@ -226,15 +226,15 @@ export default function Dashboard() {
                 <tbody>
                   {sortedWH.map((w, i) => (
                     <tr key={i} style={{ background: i % 2 === 0 ? "#ffffff" : "#f8fbff", borderBottom: "1px solid #dbeafe" }}>
-                      <td style={{ padding: "7px 10px", color: "#0f172a", fontWeight: 600 }}>{w.name}</td>
-                      <td style={{ padding: "7px 10px", color: "#475569", fontSize: 11 }}>{w.region}</td>
-                      <td style={{ padding: "7px 10px", color: "#2563eb" }}>{w.cap}</td>
-                      <td style={{ padding: "7px 10px", fontWeight: 700, color: w.pctDecl > 100 ? "#f87171" : w.pctDecl >= 90 ? "#fbbf24" : "#4ade80" }}>{w.pctDecl}%</td>
-                      <td style={{ padding: "7px 10px", color: w.pctAC > 100 ? "#dc2626" : w.pctAC >= 90 ? "#d97706" : "#475569" }}>{w.pctAC}%</td>
-                      <td style={{ padding: "7px 10px", color: w.pctDHK > 100 ? "#dc2626" : w.pctDHK >= 90 ? "#d97706" : "#475569" }}>{w.pctDHK}%</td>
-                      <td style={{ padding: "7px 10px", color: w.foreAC > 100 ? "#dc2626" : "#475569" }}>{w.foreAC}%</td>
-                      <td style={{ padding: "7px 10px", color: w.foreDHK > 100 ? "#dc2626" : "#475569" }}>{w.foreDHK}%</td>
-                      <td style={{ padding: "7px 10px" }}><span style={{ background: w.status === "🔴" ? "#fee2e2" : w.status === "🟡" ? "#fef3c7" : "#dcfce7", color: w.status === "🔴" ? "#991b1b" : w.status === "🟡" ? "#92400e" : "#065f46", padding: "3px 8px", borderRadius: 4, fontSize: 11, fontWeight: 600 }}>{statusLabel[w.status]}</span></td>
+                      <td style={{ padding: "7px 10px", color: "#0f172a", fontWeight: 600, textAlign: "left" }}>{w.name}</td>
+                      <td style={{ padding: "7px 10px", color: "#475569", fontSize: 11, textAlign: "left" }}>{w.region}</td>
+                      <td style={{ padding: "7px 10px", color: "#2563eb", textAlign: "right" }}>{w.cap}</td>
+                      <td style={{ padding: "7px 10px", fontWeight: 700, color: w.pctDecl > 100 ? "#f87171" : w.pctDecl >= 90 ? "#fbbf24" : "#4ade80", textAlign: "right" }}>{w.pctDecl}%</td>
+                      <td style={{ padding: "7px 10px", color: w.pctAC > 100 ? "#dc2626" : w.pctAC >= 90 ? "#d97706" : "#475569", textAlign: "right" }}>{w.pctAC}%</td>
+                      <td style={{ padding: "7px 10px", color: w.pctDHK > 100 ? "#dc2626" : w.pctDHK >= 90 ? "#d97706" : "#475569", textAlign: "right" }}>{w.pctDHK}%</td>
+                      <td style={{ padding: "7px 10px", color: w.foreAC > 100 ? "#dc2626" : "#475569", textAlign: "right" }}>{w.foreAC}%</td>
+                      <td style={{ padding: "7px 10px", color: w.foreDHK > 100 ? "#dc2626" : "#475569", textAlign: "right" }}>{w.foreDHK}%</td>
+                      <td style={{ padding: "7px 10px", textAlign: "center" }}><span style={{ background: w.status === "🔴" ? "#fee2e2" : w.status === "🟡" ? "#fef3c7" : "#dcfce7", color: w.status === "🔴" ? "#991b1b" : w.status === "🟡" ? "#92400e" : "#065f46", padding: "3px 8px", borderRadius: 4, fontSize: 11, fontWeight: 600 }}>{statusLabel[w.status]}</span></td>
                     </tr>
                   ))}
                 </tbody>
